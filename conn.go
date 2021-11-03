@@ -6,7 +6,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/heliumbrain/skytable-go/skyhash"
+	"github.com/heliumbrain/skytable-go/marshal"
 )
 
 // Conn is a Client wrapping a single network connection which synchronously
@@ -32,8 +32,8 @@ type Conn interface {
 	// In other words, when sending commands to skytable, Encode should only be
 	// called once per command. Similarly, Decode is expected to decode an
 	// entire skyhash response.
-	Encode(skyhash.Marshaler) error
-	Decode(skyhash.Unmarshaler) error
+	Encode(marshal.Marshaler) error
+	Decode(marshal.Unmarshaler) error
 
 	// Returns the underlying network connection, as-is. Read, Write, and Close
 	// should not be called on the returned Conn.
@@ -71,14 +71,14 @@ func (cw *connWrap) Do(a Action) error {
 	return a.Run(cw)
 }
 
-func (cw *connWrap) Encode(m skyhash.Marshaler) error {
+func (cw *connWrap) Encode(m marshal.Marshaler) error {
 	if err := m.MarshalSkyhash(cw.brw); err != nil {
 		return err
 	}
 	return cw.brw.Flush()
 }
 
-func (cw *connWrap) Decode(u skyhash.Unmarshaler) error {
+func (cw *connWrap) Decode(u marshal.Unmarshaler) error {
 	return u.UnmarshalSkyhash(cw.brw.Reader)
 }
 

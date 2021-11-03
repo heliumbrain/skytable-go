@@ -11,7 +11,7 @@ import (
 
 	"errors"
 
-	"github.com/heliumbrain/skytable-go/skyhash"
+	"github.com/heliumbrain/skytable-go/marshal"
 )
 
 // AnyIntToInt64 converts a value of any of Go's integer types (signed and unsigned) into a signed int64.
@@ -206,7 +206,7 @@ func ReadInt(r io.Reader, n int) (int64, error) {
 	}
 	i, err := ParseInt(*scratch)
 	if err != nil {
-		return 0, skyhash.ErrDiscarded{Err: err}
+		return 0, marshal.ErrDiscarded{Err: err}
 	}
 	return i, nil
 }
@@ -222,7 +222,7 @@ func ReadUint(r io.Reader, n int) (uint64, error) {
 	}
 	ui, err := ParseUint(*scratch)
 	if err != nil {
-		return 0, skyhash.ErrDiscarded{Err: err}
+		return 0, marshal.ErrDiscarded{Err: err}
 	}
 	return ui, nil
 }
@@ -238,7 +238,7 @@ func ReadFloat(r io.Reader, precision, n int) (float64, error) {
 	}
 	f, err := strconv.ParseFloat(string(*scratch), precision)
 	if err != nil {
-		return 0, skyhash.ErrDiscarded{Err: err}
+		return 0, marshal.ErrDiscarded{Err: err}
 	}
 	return f, nil
 }

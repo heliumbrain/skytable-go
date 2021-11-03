@@ -8,6 +8,7 @@ import (
 	"io"
 
 	"github.com/heliumbrain/skytable-go/internal/bytesutil"
+	"github.com/heliumbrain/skytable-go/marshal"
 )
 
 var delim = []byte{'\n'}
@@ -105,10 +106,10 @@ func peekAndAssertPrefix(br *bufio.Reader, expectedPrefix []byte) error {
 		if err := respErr.UnmarshalSkyhash(br); err != nil {
 			return err
 		}
-		return ErrDiscarded{Err: respErr}
+		return marshal.ErrDiscarded{Err: respErr}
 	}
 
-	return ErrDiscarded{Err: errUnexpectedPrefix{
+	return marshal.ErrDiscarded{Err: errUnexpectedPrefix{
 		Prefix:         b,
 		ExpectedPrefix: expectedPrefix,
 	}}
@@ -204,7 +205,7 @@ func (e *Error) UnmarshalSkyhash(br *bufio.Reader) error {
 // As implements the method for the (x)errors.As function.
 func (e Error) As(target interface{}) bool {
 	switch targetT := target.(type) {
-	case *ErrDiscarded:
+	case *marshal.ErrDiscarded:
 		targetT.Err = e
 		return true
 	default:
@@ -213,36 +214,3 @@ func (e Error) As(target interface{}) bool {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
-
-// Marshaler is the interface implemented by types that can marshal themselves
-// into valid Skyhash.
-type Marshaler interface {
-	MarshalSkyhash(io.Writer) error
-}
-
-// Unmarshaler is the interface implemented by types that can unmarshal a Skyhash
-// description of themselves. UnmarshalSkyhash should _always_ fully consume a Skyhash
-// message off the reader, unless there is an error returned from the reader
-// itself.
-//
-// Note that, unlike Marshaler, Unmarshaler _must_ take in a *bufio.Reader.
-type Unmarshaler interface {
-	UnmarshalSkyhash(*bufio.Reader) error
-}
-
-// ErrDiscarded is used to wrap an error encountered while unmarshaling a
-// message. If an error was encountered during unmarshaling but the rest of the
-// message was successfully discarded off of the wire, then the error can be
-// wrapped in this type.
-type ErrDiscarded struct {
-	Err error
-}
-
-func (ed ErrDiscarded) Error() string {
-	return ed.Err.Error()
-}
-
-// Unwrap implements the errors.Wrapper interface.
-func (ed ErrDiscarded) Unwrap() error {
-	return ed.Err
-}

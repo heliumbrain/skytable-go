@@ -1,6 +1,8 @@
 package skytable_go
 
-import "github.com/heliumbrain/skytable-go/skyhash"
+import (
+	"github.com/heliumbrain/skytable-go/marshal"
+)
 
 // Action performs a task using a Conn.
 type Action interface {
@@ -15,8 +17,8 @@ type Action interface {
 
 type CmdAction interface {
 	Action
-	skyhash.Marshaler
-	skyhash.Unmarshaler
+	marshal.Marshaler
+	marshal.Unmarshaler
 }
 
 func (c *client) Get() {
