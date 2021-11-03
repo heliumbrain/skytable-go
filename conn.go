@@ -35,7 +35,7 @@ type Conn interface {
 	Encode(marshal.Marshaler) error
 	Decode(marshal.Unmarshaler) error
 
-	// Returns the underlying network connection, as-is. Read, Write, and Close
+	// NetConn Returns the underlying network connection, as-is. Read, Write, and Close
 	// should not be called on the returned Conn.
 	NetConn() net.Conn
 }

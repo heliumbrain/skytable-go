@@ -20,11 +20,3 @@ type CmdAction interface {
 	marshal.Marshaler
 	marshal.Unmarshaler
 }
-
-func (c *client) Get() {
-
-}
-
-func (c *client) Set() {
-
-}
