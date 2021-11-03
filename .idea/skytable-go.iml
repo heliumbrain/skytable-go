@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="WEB_MODULE" version="4">
-  <component name="Go" enabled="true" />
+  <component name="Go" enabled="true">
+    <buildTags>
+      <option name="os" value="linux" />
+      <option name="arch" value="arm" />
+      <option name="customFlags">
+        <array>
+          <option value="arduino_nano33" />
+          <option value="atsamd21g18a" />
+          <option value="atsamd21g18" />
+          <option value="atsamd21" />
+          <option value="sam" />
+          <option value="cortexm" />
+          <option value="baremetal" />
+          <option value="linux" />
+          <option value="arm" />
+          <option value="tinygo" />
+          <option value="math_big_pure_go" />
+          <option value="gc.conservative" />
+          <option value="scheduler.tasks" />
+          <option value="serial.usb" />
+        </array>
+      </option>
+    </buildTags>
+  </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />

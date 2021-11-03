@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="TinyGoPlugin">
+    <option name="gc" value="conservative" />
+    <option name="goArch" value="arm" />
+    <option name="goOS" value="linux" />
+    <option name="goTags" value="arduino_nano33 atsamd21g18a atsamd21g18 atsamd21 sam cortexm baremetal linux arm tinygo math_big_pure_go gc.conservative scheduler.tasks serial.usb" />
+    <option name="scheduler" value="tasks" />
+    <option name="userTargets">
+      <list>
+        <option value="" />
+      </list>
+    </option>
+  </component>
+</project>
