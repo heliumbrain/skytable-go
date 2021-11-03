@@ -1,8 +1,7 @@
 # Skytable-go
 
 Skytable-go is a  [Skytable](https://skytable.io) client for Go. See the reference links below for documentation and
-general usage examples. This package is heavily inspired
-by [Radix](https://raw.githubusercontent.com/mediocregopher/radix/)
+general usage examples. This package is heavily inspired by [Radix](https://github.com/mediocregopher/radix)
 
 **[Documentation](https://pkg.go.dev/github.com/heliumbrain/skytable-go)**
 
