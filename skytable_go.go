@@ -168,14 +168,6 @@ import (
 
 var errClientClosed = errors.New("client is closed")
 
-type Action struct {
-}
-
-func (a Action) Run(cw *connWrap) error {
-	return nil
-	//TODO implement me!
-}
-
 // Client describes an entity which can carry out Actions, e.g. a connection
 // pool for a single redis instance or the cluster client.
 //

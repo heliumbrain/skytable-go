@@ -16,7 +16,7 @@ var delim = []byte{'\n'}
 // prefixes a Skyhash message might start with.
 type prefix []byte
 
-// Enumeration of each of Skyhash's message types, each denoted by the prefix which
+// Enumeration of each of Skyhash message types, each denoted by the prefix which
 // is prepended to messages of that type.
 //
 // In order to determine the type of a message which is being written to a
